@@ -1,44 +1,44 @@
-* Query : Select count(is_page_errored) from eshop where is_page_errored==1; <br>
- Output: <br>
-This query gets the total count of the web pages which crashed or errored during a customer purchase <br>
+* Query : Select count(is_page_errored) from eshop where is_page_errored==1; 
+ Output: 
+This query gets the total count of the web pages which crashed or errored during a customer purchase 
 
-* Query : Select url,count(*) as max_count from eshop group by url order by count(*) desc limit 10; <br>
-Output: <br>
-This query is used to get the results of the most viewed web page among all the available web pages <br>
+* Query : Select url,count(*) as max_count from eshop group by url order by count(*) desc limit 10; 
+Output: 
+This query is used to get the results of the most viewed web page among all the available web pages 
 
-* Query : Select state,count(*) as max_count from eshop group by state order by count(*) desc limit 10; <br>
-Output: <br>
-This query gets the count of the customers from various cities in the country <br>
+* Query : Select state,count(*) as max_count from eshop group by state order by count(*) desc limit 10; 
+Output: 
+This query gets the count of the customers from various cities in the country 
 
-* Query : Select count(DISTINCT(IP_address)) from eshop where Dates='2012-03-01'; <br>
-Output: <br>
-This query is used to get the number of customers who visited our web page on the day dated ‘2012-03-01’ <br>
+* Query : Select count(DISTINCT(IP_address)) from eshop where Dates='2012-03-01'; 
+Output: 
+This query is used to get the number of customers who visited our web page on the day dated ‘2012-03-01’ 
 
-* Query : Select count(DISTINCT(IP_address)) from eshop where day('2012-04-15')-3=day('2012-04-10'); <br>
-Output: <br>
-This query is used to check whether any new customer have visited our web page in the past three days <br>
+* Query : Select count(DISTINCT(IP_address)) from eshop where day('2012-04-15')-3=day('2012-04-10'); 
+Output:
+This query is used to check whether any new customer have visited our web page in the past three days 
 
-* Query : Select Dates,count(IP_address) as max_count from eshop group by Dates order by count(*) desc limit 10; <br>
-Output: <br>
-This query gets the dates where the interaction has been the highest printing them from highest to the lowest <br>
+* Query : Select Dates,count(IP_address) as max_count from eshop group by Dates order by count(*) desc limit 10; 
+Output: 
+This query gets the dates where the interaction has been the highest printing them from highest to the lowest 
 
-* Query : Select ip_address,count(is_purchased) as max_count from eshop group by ip_address order by count(*) desc limit 10; <br>
-Output: <br>
-This query is used to get the IP address the user who has purchased the most from our website <br>
+* Query : Select ip_address,count(is_purchased) as max_count from eshop group by ip_address order by count(*) desc limit 10; 
+Output: 
+This query is used to get the IP address the user who has purchased the most from our website 
 
-* Select IP_address , clickstream_id from eshop CLUSTER BY IP_address limit 10; <br>
-Output: <br>
-This query has “clustered by” clause is used to divide the table into buckets. <br>
+* Select IP_address , clickstream_id from eshop CLUSTER BY IP_address limit 10;
+Output: 
+This query has “clustered by” clause is used to divide the table into buckets. 
 
-* Select IP_address , state from eshop DISTRIBUTE BY state limit 10; <br>
-Output: <br>
-This query has DISTRIBUTE BY clause is used to distribute the input rows among reducers. <br>
+* Select IP_address , state from eshop DISTRIBUTE BY state limit 10; 
+Output: 
+This query has DISTRIBUTE BY clause is used to distribute the input rows among reducers. 
 
-* Select sum(is_purchased) from eshop; <br>
-Output: <br>
-This query gets the quantity of total purchases that occured <br>
+* Select sum(is_purchased) from eshop; 
+Output: 
+This query gets the quantity of total purchases that occured 
 
-* 
+
 
 
 
