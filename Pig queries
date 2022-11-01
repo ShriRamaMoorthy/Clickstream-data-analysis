@@ -1,0 +1,61 @@
+PIG QUERIES:
+1.Load the data into a relation
+>>DEFINE ApacheCommonLogLoader org.apache.pig.piggybank.storage.apachelog. CommonLogLoader (); 
+>>DEFINE DayExtractor org.apache.pig.piggybank.evaluation.util.apachelogparser. DateExtractor ('yyyy-MM-dd');
+
+2.Loadig Data to a variable:
+Query :shop6 = LOAD '/home/hdoop/Downloads' USING PigStorage(',') as (clickstream_id:Double,Dates:chararray,time:chararray,timestamp:chararray ,IP_address:chararray,url:chararray,is_purchased:int,is_page_errored:float,user_session_id:chararray,city:chararray,state:chararray,country:chararray);
+Output: this query creates the table in the pig environment
+
+
+3.Describing the dataset loaded:(Structure of the dataset)
+describe eshop8;
+Output:
+shop8: {clickstream_id: double,Dates: chararray,time: chararray,timestamp: chararray,IP_address: chararray,url: chararray,is_purchased: int,is_page_errored: float,user_session_id: chararray,city: chararray,state: chararray,country: chararray}
+
+
+4.Query :  grpd = GROUP eshop8 BY IP_address; 
+req_cnt = FOREACH grpd GENERATE group AS IP_address, COUNT(eshop8) AS tot_visits;
+Output:
+This query is used to retrieve how many times a particular customer has visited our webpage.
+ 
+ 
+5.Query :  User_foreach = foreach shop8 generate IP_address,city;
+Limit_data = LIMIT user_foreach 5;
+DUMP Limit_data;
+Output:
+This query is used to create a separate schema or a table for the declared instances
+ 
+
+6.Query : filter_data = FILTER shop8 BY city == ‘detroit’
+DUMP filter_data
+Output:
+This query is used to retrieve all the rows which has ‘detroit’ as its city
+ 
+
+7.Query: ip_data = GROUP shop8 BY IP_address;
+Ip_count-FOREACH ip_data GENERATE group AS timestamp , COUNT(shop8) as total_visits;
+DUMP ip_count;
+Output:
+This query gets the Total number of request from a specific address
+     
+
+8.Query: fil= FILTER shop8 BY is_purchased == 0;
+unsuccess = LIMIT fil 25;
+DUMP unsuccess
+Output:
+This query is used to get the Total number of unsuccessful requests or purchases
+ 
+
+9.Query : fil= FILTER shop8 BY is_purchased == 1;
+success = LIMIT fil 25;
+DUMP success
+Output:
+This query is used to get the details of the customers whose purchase has been successful.
+ 
+
+10.Query: time_data = GROUP shop8 BY DayExtractor(timestamp) as day; 
+byte_count = FOREACH time_data GENERATE group AS timestamp,SUM(shop8.times) AS total_bytes;
+Output:
+This query is used to print the total interaction minutes of the customers
+ 
